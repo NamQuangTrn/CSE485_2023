@@ -1,115 +1,95 @@
+<?php
+$servername = "localhost";
+$username = "root";
+$password = "";
+// $db = "btth01_cse485_ex";
+$db = "btth01_cse485";
+try {
+    $conn = new PDO("mysql:host=$servername;dbname=$db", $username, $password);
+    // set the PDO error mode to exception
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $stm = $conn->prepare("select count(users.id) as cnt from users");
+    $stm->execute();
+    $result = $stm->fetchAll();
 
 
-<!DOCTYPE html>
-<html lang="en">
+    $stm3 = $conn->prepare("select count(tacgia.ma_tgia) as stg from tacgia");
+    $stm3->execute();
+    $result3 = $stm3->fetchAll();
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Music for Life</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="css/style_login.css">
-</head>
+    $stm2 = $conn->prepare("select count(theloai.ma_tloai) as stl from theloai");
+    $stm2->execute();
+    $result2 = $stm2->fetchAll();
+
+    $stm4 = $conn->prepare("select count(baiviet.ma_bviet) as sbv from baiviet");
+    $stm4->execute();
+    $result4 = $stm4->fetchAll();
+} catch (PDOException $e) {
+    echo "Connection failed: " . $e->getMessage();
+}
+?>
+
+<?php include './style.php'; ?>
 
 <body>
-    <header>
-        <nav class="navbar navbar-expand-lg bg-body-tertiary shadow p-3 bg-white rounded">
-            <div class="container-fluid">
-                <div class="h3">
-                    <a class="navbar-brand" href="#">Administration</a>
-                </div>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link active fw-bold" aria-current="page" href="./">Trang chủ</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="../index.php">Trang ngoài</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="category.php">Thể loại</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="author.php">Tác giả</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="article.php">Bài viết</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-
-    </header>
-    <main class="container mt-5 mb-5">
-        <!-- <h3 class="text-center text-uppercase mb-3 text-primary">CẢM NHẬN VỀ BÀI HÁT</h3> -->
-        <div class="row">
-            <div class="col-sm-3">
-                <div class="card mb-2" style="width: 100%;">
-                    <div class="card-body">
-                        <h5 class="card-title text-center">
-                            <a href="" class="text-decoration-none">Người dùng</a>
-                        </h5>
-
-                        <h5 class="h1 text-center">
-                            110
-                        </h5>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-sm-3">
-                <div class="card mb-2" style="width: 100%;">
-                    <div class="card-body">
-                        <h5 class="card-title text-center">
-                            <a href="" class="text-decoration-none">Thể loại</a>
-                        </h5>
-
-                        <h5 class="h1 text-center">
-                            10
-                        </h5>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-sm-3">
-                <div class="card mb-2" style="width: 100%;">
-                    <div class="card-body">
-                        <h5 class="card-title text-center">
-                            <a href="" class="text-decoration-none">Tác giả</a>
-                        </h5>
-
-                        <h5 class="h1 text-center">
-                            20
-                        </h5>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-sm-3">
-                <div class="card mb-2" style="width: 100%;">
-                    <div class="card-body">
-                        <h5 class="card-title text-center">
-                            <a href="" class="text-decoration-none">Bài viết</a>
-                        </h5>
-
-                        <h5 class="h1 text-center">
-                            110
-                        </h5>
-                    </div>
-                </div>
-            </div>
+    <section class="page mt-5">
+        <div class="container">
+            <table class="table w-100 h-100 border border-primary">
+                <thead>
+                    <th class="content table-active text-center font-weight-bold h4">
+                        <a href="#" class="text-dark">Người dùng</a>
+                    </th>
+                    <th class="content table-primary text-center font-weight-bold h4">
+                        <a href="./category.php" class="text-dark">Thể loại</a>
+                    </th>
+                    <th class="content table-secondary text-center font-weight-bold h4"><a href="" class="text-dark">Tác giả</a></th>
+                    <th class="content table-success text-center font-weight-bold h4"><a href="" class="text-dark">Bài viết</a></th>
+                </thead>
+                <tbody>
+                    <td class="content table-active text-center">
+                        <span>
+                            <?php foreach ($result as $row) { ?>
+                                <p>
+                                    <?php echo $row['cnt'] ?>
+                                </p>
+                            <?php }
+                            ?>
+                        </span>
+                    </td>
+                    <td class="content table-primary text-center">
+                        <span>
+                            <?php foreach ($result2 as $row2) { ?>
+                                <p>
+                                    <?php echo $row2['stl'] ?>
+                                </p>
+                            <?php }
+                            ?>
+                        </span>
+                    </td>
+                    <td class="content table-secondary text-center">
+                        <span>
+                            <?php foreach ($result3 as $row3) { ?>
+                                <p>
+                                    <?php echo $row3['stg'] ?>
+                                </p>
+                            <?php }
+                            ?>
+                        </span>
+                    </td>
+                    <td class="content table-success text-center">
+                        <span>
+                            <?php foreach ($result4 as $row4) { ?>
+                                <p>
+                                    <?php echo $row4['sbv'] ?>
+                                </p>
+                            <?php }
+                            ?>
+                        </span>
+                    </td>
+                </tbody>
+            </table>
         </div>
-    </main>
-    <footer class="bg-white d-flex justify-content-center align-items-center border-top border-secondary  border-2" style="height:80px">
-        <h4 class="text-center text-uppercase fw-bold">TLU's music garden</h4>
-    </footer>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    </section>
 </body>
 
 </html>

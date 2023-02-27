@@ -1,0 +1,11 @@
+.header {
+  box-shadow: 1px 1px 10px rgb(0 0 0 / 30%);
+  margin-bottom: 150px;
+}
+section .page {
+  margin-top: 100px !important;
+}
+.footer {
+  align-items: center;
+  text-align: center;
+}
