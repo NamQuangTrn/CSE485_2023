@@ -50,7 +50,7 @@ if ($conn->connect_error) {
             <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon1">Mã thể loại</span>
             </div>
-            <input type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" value="<?php echo $rows['ma_tloai']; ?>">
+            <input type="text" class="form-control" readonly placeholder="" aria-label="Username" aria-describedby="basic-addon1" value="<?php echo $rows['ma_tloai']; ?>">
         </div>
         <div class="input-group mb-3">
             <div class="input-group-prepend">
