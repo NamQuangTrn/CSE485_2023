@@ -2,7 +2,8 @@
 $servername = "localhost";
 $username = "root";
 $password = "";
-$db = "btth01_cse485_ex";
+// $db = "btth01_cse485_ex";
+$db = "btth01_cse485";
 
 try {
     $conn = new PDO("mysql:host=$servername;dbname=$db", $username, $password);
